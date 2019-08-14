@@ -15,3 +15,5 @@ https://hub.docker.com/r/andresvidal/rpi3-mongodb3/
 https://github.com/andresvidal/rpi3-mongodb3/blob/master/Dockerfile
 
 -> sudo ./usr/bin/mongod
+
+! user/gruppe muss root sein im service und im /usr/bin, systemctl mit sudo 
