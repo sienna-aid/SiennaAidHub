@@ -10,8 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SiennaAidHub.Models;
+using SiennaAidHub.Services;
 
-namespace Hub
+namespace SiennaAidHub
 {
     public class Startup
     {
@@ -25,6 +27,13 @@ namespace Hub
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<SiennaDatabaseSettings>(
+                Configuration.GetSection(nameof(SiennaDatabaseSettings))
+            );
+
+            services.AddSingleton<ISiennaDatabaseSettings>(sp => sp.GetRequiredService<IOptions<SiennaDatabaseSettings>>().Value);
+            services.AddSingleton<DataService>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

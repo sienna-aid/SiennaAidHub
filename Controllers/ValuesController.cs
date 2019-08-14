@@ -3,13 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SiennaAidHub.Services;
 
-namespace Hub.Controllers
+namespace SiennaAidHub.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly DataService _data;
+
+        public ValuesController(DataService _dataService)
+        {
+            _data = _dataService;
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -21,7 +29,11 @@ namespace Hub.Controllers
         [HttpGet("{id}")]
         public ActionResult<string> Get(int id)
         {
-            return "value";
+            var x = _data.Create(new Models.IncomingData{
+                Value = "Hello world"
+            });
+
+            return x.Id;
         }
 
         // POST api/values
