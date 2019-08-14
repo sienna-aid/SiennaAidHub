@@ -8,18 +8,20 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace SiennaAidHub
+namespace Hub
 {
     public class Program
     {
-	public static void Main(string[] args)
-	{
-	    CreateWebHostBuilder(args).Build().Run();
-	}
+        public static void Main(string[] args)
+        {
+            CreateWebHostBuilder(args).Build().Run();
+        }
 
-	public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-	    WebHost.CreateDefaultBuilder(args)
-		.UseUrls("http://0.0.0.0:80")
-		.UseStartup<Startup>();
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseKestrel(options => {
+                    options.Listen(System.Net.IPAddress.Any, 5000, listenOpts => { listenOpts.UseHttps("cert/raspberrypi.pfx", "sienna"); });
+                })
+                .UseStartup<Startup>();
     }
 }
