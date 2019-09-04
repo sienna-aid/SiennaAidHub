@@ -28,9 +28,9 @@ namespace SiennaAidHub.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<IncomingData> Get(int id)
+        public ActionResult<IncomingData> Get(string id)
         {
-	    return _data.Get(id.ToString());
+	    return _data.Get(id);
         }
 
         // POST api/values
@@ -43,16 +43,16 @@ namespace SiennaAidHub.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] IncomingData value)
+        public void Put(string id, [FromBody] IncomingData value)
         {
-	    _data.Update(id.ToString(), value);
+	    _data.Update(id, value);
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(string id)
         {
-	    _data.Remove(id.ToString());
+	    _data.Remove(id);
         }
     }
 }
