@@ -23,36 +23,36 @@ namespace SiennaAidHub.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<IncomingData>> Get()
         {
-	    return _data.Get();
+            return _data.Get();
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<IncomingData> Get(string id)
         {
-	    return _data.Get(id);
+            return _data.Get(id);
         }
 
         // POST api/values
         [HttpPost]
         public string Post([FromBody] IncomingData value)
         {
-	    var item = _data.Create(value);
-	    return item.Id;
+            var item = _data.Create(value);
+            return item.Id;
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
         public void Put(string id, [FromBody] IncomingData value)
         {
-	    _data.Update(id, value);
+            _data.Update(id, value);
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(string id)
         {
-	    _data.Remove(id);
+            _data.Remove(id);
         }
     }
 }
